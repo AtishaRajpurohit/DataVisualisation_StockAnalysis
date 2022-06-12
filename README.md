@@ -16,6 +16,6 @@ Mapbox, Highcharts, Plotly, Altair, ggplot2 and some more.
 For a user wanting to use these visualisation to get some insight and explanation into stock market analysis, the explanation would be thorough. Both the important analyses : Technical and Fundamental have been illustrated using these visualisations. The analysis also extends onto GICS (Global Industry Classification Standard) sectoral and individual stock market analysis. To help a user 'Examples of Usage' have also been stated throughout, to explain to the user how a visualisation can be used for stock market analysis.
 
 ## Navigation Tips
-*This project was a group project and the file with the visualisations along with the narrative is in 'index.html'.The code has been built by all the group members in collaboration.One can directly access that using my portfolio link : LINK*
+*This project was a group project and the file with the visualisations along with the narrative is in 'index.html'.The code has been built by all the group members in collaboration.*
 
 
