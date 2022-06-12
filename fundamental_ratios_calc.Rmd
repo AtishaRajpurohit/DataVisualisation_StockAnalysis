@@ -1,0 +1,227 @@
+---
+title: "Fundamental Ratios"
+author: "Atisha Rajpurohit"
+date: '2022-04-05'
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(RColorBrewer)
+```
+
+```{r}
+#setwd("~/Desktop/503/Project")
+fundamental=read_csv('data/fundamentals.csv')
+fcol=colnames(fundamental)
+```
+
+# Computing the Financial Ratios for 5 categories
+
+## Liquidity Ratios
+
+### 1. Current Ratio
+
+This ratio is used to assess ther the company will be able to its bill over the next few months.
+1 - Low
+2 - Normal
+3 - High
+
+$$Current Ratio=Current Assets / Current Liabilities$$
+columns - Total Current Assets/Total Current Liabilities
+
+```{r}
+fundamental2=fundamental %>% mutate(current_ratio=`Total Assets`/`Total Liabilities`) %>% 
+  mutate(cr_int=case_when(current_ratio<1~"Low",
+                          current_ratio==1~"Normal",
+                          current_ratio>1~"High"))
+
+```
+
+### 2. Cash Ratio
+
+This ratio assesses whether a company has enough cash to pay its current liabilties.
+<1 Low
+=1 Enough
+>1 High
+
+$$Cash Ratio=Cash and Cash Equivalents/Total Current Liabilties$$
+column Cash Ratio
+
+```{r}
+fundamental2=fundamental2 %>% mutate(cash_ratio=`Cash Ratio`) %>% 
+  mutate(ca_int=case_when(cash_ratio<1~"Low",
+                          cash_ratio==1~"Normal",
+                          cash_ratio>1~"High"))
+```
+
+
+$$ Quick Ratio$$
+
+column Quick Ratio
+
+
+## Financial Leverage
+
+### 3. Asset Gearing
+
+$$Leverage = Debt/Equity$$
+columns - Long-Term Debt,Short-Term Debt / Current Portion of Long-Term Debt
+
+```{r}
+fundamental2=fundamental2 %>% mutate(leverage=(`Long-Term Debt`+`Short-Term Debt / Current Portion of Long-Term Debt`)/`Total Equity`) %>% 
+  mutate(lev_int=case_when(leverage>0.5~"High",
+                   ((leverage<=0.5)&(leverage>0.25))~"Normal",
+                   leverage<=0.25~"Low"))
+```
+
+
+## Efficiency Ratios
+
+### 4. Inventory Turnover Period
+
+This ratio shows much inventory a company holds with respect to its cost of sales.
+
+Interpretation
+<2 - Low
+2-4 - Normal
+>4 - High
+
+$$Inventory Turnover Ratio= Cost of Goods/Average Inventory$$
+columns - Inventory/Cost of Revenue*365
+
+```{r}
+fundamental2=fundamental2 %>% mutate(inventory_turnover=(Inventory/`Cost of Revenue`)*365) %>% 
+  mutate(inv_int=case_when(inventory_turnover<=20~"Low",
+                           (inventory_turnover>20)|(inventory_turnover<40)~"Normal",
+                           inventory_turnover>=40~"High"))
+```
+
+
+
+### 5. Asset Turnover Ratio
+
+It tells a company how much revenue a company has generated based on the current assets.
+
+Interpretation
+<0.7 - Low
+0.7-0.8 - Normal
+>0.8 High
+
+$$Asset Turnover Ratio = Total Revenue/Total Assets$$
+```{r}
+fundamental2=fundamental2 %>% mutate(asset_utilisation=`Total Revenue`/`Total Assets`) %>% 
+  mutate(au_int=case_when(asset_utilisation<1~"Low",
+                          asset_utilisation==1~"Normal",
+                          asset_utilisation>1~"High"))
+```
+
+
+## Profitability Ratios
+
+### 6. RoE
+
+
+$$Return on Equity = Net Income/ Total equity$$
+
+columns-Net Income, Total Equity
+
+```{r}
+fundamental2=fundamental2 %>% mutate(return_on_equity=`Net Income`/`Total Equity`) %>% 
+mutate(roe_int=case_when(return_on_equity<0.1~"Low",
+                         ((return_on_equity>=0.1)&(return_on_equity<0.15))~"Normal",
+                         return_on_equity>=0.15~"High"))
+```
+
+### 7. RoA
+
+$$Return on Assets = Net Income/ Total assets$$
+```{r}
+fundamental2=fundamental2 %>% mutate(return_on_Assets=`Net Income`/`Total Assets`) %>% 
+mutate(roa_int=case_when(return_on_Assets<0.01~"Low",
+                         ((return_on_Assets>=0.01)&(return_on_equity<0.05))~"Normal",
+                         return_on_Assets>=0.05~"High"))
+```
+
+
+## Market Ratios
+
+### 8. Price Earnings Ratio
+
+
+$$Price Earnings Ratio = Market Price of a Share/Earnings per Share$$
+For Market Price, the prices-adjusted-split dataset will be used, by joining on the dates.The closing prices will be used
+```{r}
+prices_adj=read_csv('data/prices-split-adjusted.csv')
+#Merging the prices dataset with the fundamental dataset
+fundamental3=fundamental2 %>% mutate(ticker_symbol=`Ticker Symbol`) %>% 
+  mutate(period_ending=`Period Ending`)
+
+market_prices=merge(fundamental3,prices_adj[,c("date","close","symbol")],by.x='ticker_symbol',by.y='symbol',all.x=TRUE)
+
+fundamental3=market_prices %>% mutate(merger=case_when(period_ending==date~"True",
+                                                  period_ending!=date~"False")) %>% 
+  filter(merger=="True") %>% 
+  mutate(price_earnings_ratio=close/`Earnings Per Share`) %>% 
+  mutate(pe_int=case_when(price_earnings_ratio<15~"Low",
+                          ((price_earnings_ratio>=15)&(price_earnings_ratio<18))~"Normal",
+                          price_earnings_ratio>=18~"High"))
+```
+
+
+$$Dividend Payout Ratio= Dividend per Share/ Earning per Share$$
+To calculate dividend payour ratio, the dividend 
+
+```{r}
+fundamental4=fundamental3 %>% select(cr_int,
+                                     ca_int,
+                                     lev_int,
+                                     inv_int,
+                                     au_int,
+                                     roe_int,
+                                     roa_int,
+                                     pe_int)
+fundamental5=fundamental3 %>% select(pe_int,
+                                     lev_int)
+
+fundamental6=fundamental3 %>% select(cr_int,
+                                     ca_int,
+                                     lev_int,
+                                     inv_int,
+                                     au_int,
+                                     roe_int,
+                                     roa_int,
+                                     pe_int,
+                                     ticker_symbol)
+
+#write_csv(fundamental4,'ratio_test2.csv')
+#write_csv(fundamental6,'ratio_test_radar.csv')
+
+#write_csv(na.omit(fundamental3),'ratio_test_num.csv')
+```
+
+Creating a data frame for the circular barplot
+```{r}
+fundamental_4=fundamental3 %>% select(current_ratio,
+                                     leverage,
+                                     asset_utilisation,
+                                     `After Tax ROE`,
+                                     price_earnings_ratio,
+                                     `For Year`,
+                                     ticker_symbol)
+write_csv(na.omit(fundamental_4),'5_ratios.csv')
+```
+
+```{r}
+fundamental_5=fundamental3 %>% select(current_ratio,
+                                     leverage,
+                                     asset_utilisation,
+                                     `After Tax ROE`,
+                                     price_earnings_ratio,
+                                     `For Year`,
+                                     ticker_symbol,
+                                     `Profit Margin`
+                                     ) %>% 
+  filter(`For Year`==2015)
+#write_csv(na.omit(fundamental_4),'scatter_ratios.csv')
+```

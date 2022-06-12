@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ANLY 503- Project Group 14</title>
+    <link rel="stylesheet" href="frontend/fontawesome-5.5/css/all.min.css" />
+    <link rel="stylesheet" href="frontend/slick/slick.css">
+    <link rel="stylesheet" href="frontend/slick/slick-theme.css">
+    <link rel="stylesheet" href="frontend/magnific-popup/magnific-popup.css">
+    <link rel="stylesheet" href="frontend/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="frontend/css/tooplate-infinite-loop.css" />
+<!--
+
+-->
+  </head>
+  <body>
+    <!-- Hero section -->
+    <section id="infinite" class="text-white tm-font-big tm-parallax">
+      <!-- Navigation -->
+      <nav class="text-white navbar navbar-expand-md tm-navbar" id="tmNav">              
+        <div class="text-white container">   
+          <div class="text-white tm-next">
+              <a href="#infinite" class="navbar-brand"></a>
+          </div>             
+            
+          <button class="text-white navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars navbar-toggler-icon"></i>
+          </button>
+          <div class="text-white collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#infinite">Home        <span style='color:#38B;'>.</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#whatwedo">Introduction        <span style='color:#38B;'>.</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#whatwedo2">Methods        <span style='color:#38B;'>.</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#whatwedo3">HQ Locations</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#Technical">Technical Results</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#Fundamental">Fundamental Results</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link tm-nav-link" href="#Conclusion">Conclusion        <span style='color:#38B;'>.</span></a>
+              </li>
+                              
+            </ul>
+          </div>        
+        </div>
+      </nav>
+      <div class="text-center tm-hero-text-container">
+        <div class="tm-hero-text-container-inner">
+            <h2 class="tm-hero-title">Data Visualization to Help Retail Investors</h2>
+
+            <p class="tm-hero-subtitle">
+                Group 14:
+                <br>
+                Jack Piccione, Olivier Kuhn de Chizelle, Atisha Rajpurohit, Matene Zamaninia & Abhishek Dutt
+              <br>
+            </p>
+        </div>        
+      </div>
+
+      <div class="tm-next tm-intro-next">
+        <a href="#whatwedo" class="text-center tm-down-arrow-link">
+          <i class="fas fa-2x fa-arrow-down tm-down-arrow"></i>
+        </a>
+      </div>      
+    </section>
+
+    <section id="whatwedo" class="tm-section-pad-top">
+        <div class="container">
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <h2 class="tm-text-primary mb-4 tm-section-title">Introduction</h2>
+                        <p class="mb-4 tm-intro-text">
+                            No matter how much or how little experience you have in a given niche, investing can be complicated. You’ll often be dealing with hundreds of variables, thousands of possible decisions, and a cluster of holdings in your portfolio at any given time. Financial analysis such as technical and fundamental analyses can be overwhelming for a retail investor. The goal of this project is to help a retail investor to digest technical and fundamental data for stock selection by using data visualization. The series of visualizations below will provide information about these analyses and explanations for them, aiming to simplify the process by making the data easily interpretable.
+                        <p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="whatwedo2" class="tm-section-pad-top">
+
+      <div class="container">
+
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <h2 class="tm-text-primary mb-4 tm-section-title">Methods</h2>
+                        <p>The data we utilized in this project regards over 500 companies traded on the New York Stock Exchange. The data contains multiple files, and contains information such as fundamentals data, securities, and daily historical prices dating from the beginning of January 2010 to the end of December 2016. We obtained the dataset from Kaggle, and it can be accessed here.
+                        </p>
+                        <p>
+                            The background colors of all plots were chosen to be the same throughout the project to create homogeneity across different sections. This was a conscious decision aimed to prevent users from unnecessary distractions and aid them in focusing on the informative parts of the visualization. Additionally, the GICS Sectors have the same color scheme in all plots as this creates cohesion in the project.
+                        </p>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Plot 1: Choropleth (Headquarters by state)</h2>
+                        <p class="mb-4 tm-intro-text">
+                          Significant data collection,  processing, and feature generation were completed in developing this graph. The initial dataset had information about the ticker symbols, company name, GICS sector, and address for each company. In the first step, the address information was split into a city and state component and added to the dataset as features. These would be necessary for when the information was transferred to the API. Additionally, using a dictionary, a third feature was generated that mapped state names to their abbreviated versions.  Subsequently, the state and city information for each company was transferred to the OpenCageGeoCode API and the latitude and longitude of the cities and states were retrieved and added to the dataset as new features, without which the plot would not have been possible. This new dataset was decided to be extracted as this information is stagnant and will not change. Another data collection method used was done through the yahoo finance API. By utilizing the yahoo finance API, it was possible to retrieve real-time stock prices for the majority of the stocks. The stock prices were also added to the data as a new feature. This step was designed to be completed in the plotting process as stock prices change frequently and it would be counterintuitive to clean the entirety of the dataset every time the stock prices were to be updated.
+                        </p>
+                        <p>
+                            The majority of Plot 1 was conducted solely through plotly. However, the Mapbox API was further utilized in order to provide users with better graphics and desired styling formats. This plot has 3 different dimensional aspects. 1. The location of the headquarters within the U.S. by city and state 2. The coloring of the companies by their respective GICS sector and 3. The size of each scatter point is relative to the company's stock price. As for usability, the combination of filtering information based on the GICS sector using the labels on the right side of the graph, and scatter point size allows users to easily understand the relative stock prices among companies within the same sectors.
+                        </p><br>
+
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Plot 2,3&4: Time Series Modeling (Best performing sectors and companies)</h2>
+                        <p class="mb-4 tm-intro-text">
+                        Plot 2, Plot 3, and Plot 4 were generated following very similar data processing. We needed to generate a new dataset based on the securities and the prices-split-adjusted datasets. By merging the two datasets on the Ticker symbols, we gain additional knowledge of the GICS Sector tied to the adjusted prices data. We then dismissed the few companies which had missing dates and kept only tickers that spawned the whole duration of interest.
+                        </p>
+                        <p>One of the most fundamental visualizations of financial data is a time series.  It provides a great summary of a company or industry’s success and history. Given that there were hundreds of companies in our dataset it was not feasible or useful to create time series for each company.  Instead, it was more useful to group the companies by industry and plot the time series for each industry. We, therefore, generated Plot 2, where we scaled each industry’s stock value to start at 100 dollars. This allows a potential investor to see how 100 dollars would increase in value over time. Having each sector start at the same value, makes it easy for an investor to see the true growth of each sector during the time period.
+                        </p>
+                        <p>The design choices for the visualization were straightforward.  Each GICS Sector was encoded by color to help differentiate the sectors. Plotting all the time series in one figure, as opposed to each having its own figure, results in an easy comparison from one industry to another. Although, users are still able to select the industries they want to be displayed in the figure.  Users can choose any combination of industries to include. The scale on the y-axis also adjusts based on the combination of industries selected.  Additionally, four buttons are provided for users to manipulate the time variable.  If the time window of interest is not included as a button the user can manually manipulate the window using the slider.  Providing tools to manipulate time helps display the state of the industries at any given time. Lastly, each data point can be seen by hovering over the point on the plot.
+                        <p>Plot 3, which is also a Time Series plot, follows the same visual encodings as Plot 2. Plot 3, however, only reflects the top-performing ticker for each GICS sector, defined as the ticker that had the highest return at the end date of the dataset. Once again, the closing prices were scaled to start at 100 dollars, which allows us to track how an investment of that size would change from January 1st, 2010 to December 31st, 2016.  Each company present in Plot 3 is color-coded to the appropriate sector they belong to, following the same scheme as Plot 2.
+                        <p>Plot 4 builds upon the foundations of Plot 2 and Plot 3 and helps us lead into more ticker-specific discussions. Plot 4 is a Bar Chart showing the returns of the best five performing tickers for each GICS sector. The color scheme for each industry is the same as previously established, and the user is able to select which industry to include or exclude from the graph. This allows us to see how the best-performing tickers from each sector compare to each other, but also to see if anyone company dominates a particular sector.
+                        <p>Plot 2 and 3 are have multiple views coordinated, and are the linked view requirement for our project.
+                        <br>
+                        <br>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Plot 5&6: Line Chart (Current ratio and Cash ratio for each GICS sector)</h2>
+                        <p class="mb-4 tm-intro-text">
+                        Plot 5 and Plot 6 rely once again on data munging performed on securities.csv and fundamentals.csv.  As per usual, the two datasets were combined on ticker name, but then the current and cash ratios were grouped by GICS sector, and the mean value for these two ratios was computed. The dataset was then fed into the HTML and CSS files that were used to create the two plots, using the CSS library called highcharts.
+                        </p>
+                        <p>Each individual sector line is plotted every second, once all sectors are plotted, there is a two-second gap after which the plot is automatically refreshed, and is replotted. This was done particularly to highlight how the given ratio changes over the period of time for each particular sector.
+                        <p>The color scheme of these two plots is similar to the entire project, with a peach color that is the background of the plot, and the colors of each individual sector are the same throughout the project. On hovering over the plots, the values of the ratios for that particular year are displayed for each sector, and each sector has a unique marker despite having unique colors, to help people with visual impairments.
+                        <br>
+                        <br>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Plot 7: Radar Chart (Five ratios for each GICS sector)</h2>
+                        <p class="mb-4 tm-intro-text">
+                        To create Plot 7, which is also the “innovative view” of the project, we munged data from securities.csv and fundamentals.csv. Similar to plots 5&6, the mean of the ratios were taken for each individual sector, the only two differences being that only the latest data available was calculated, and five ratios were computed instead of two. After this, the data was scaled to a five-point scale, this is “innovative” as it gets hard to visualize five different data points that vary a lot but it is easier to interpret if the data is on a five-point scale. This data was then passed to a python file that was used plotly to create the innovative radar plot. The plot features a dropdown selection bar that allows the user to select an individual sector to be plotted, or even plot all the sectors together.
+                        <p>The color scheme of this plot is also similar to the entire project, with a peach color that is the background of the plot, and the colors of each individual sector are the same throughout the project, the level of opacity is set at 0.4, to allow overlapping plots to be visible.
+                        <br>
+                        <br>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Plot 8: Circular Barplot (Top 10 Stocks based on 5 Important Ratios)</h2>
+                        <p class="mb-4 tm-intro-text">To create plot 8, most of the values have been calculated from the fundamentals.csv. Fundamental ratios have been computed using the relevant columns. After that, the 10 best performing ratios based on each of the 5 important ratios have been added to a new data set. Then these 5 data sets have been combined to give the final data set to be used for the purpose of creating the circular barplot. It must be noted that all the ratios have been scaled to create a barplot which makes sense.
+                        <p>The theme has been consistent with the rest of the visualizations, keeping a peach background and using bright colors to represent the bars. Different bright colors have been used here as they are representing a ratio and not sectors, which is why different colors are essential. The reason to use a circular barplot instead of a regular barplot is that it is a different way to show 50 individual tickers, and then the plots would not seem repetitive. Ticker labels have been added at the top of the barplot and angles have been calculated for each of these tickers from -90 to 90. Finally the horizontal adjust for each of these tickers has also been 0 or 1 based on whether the angle was from 0-90 or -90-0.
+                        <br>
+                        <br>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Plot 9&10: Scatter Plots (Comparison of Price Earnings Ratio vs Leverage and Asset Utilization vs Return on Equity)</h2>
+                        <p class="mb-4 tm-intro-text">Both Plot 9 and 10, are based on the same design. The only difference is what their axes represent. The data has been taken from the fundamentals.csv and then the ratios have been created for these plots. After that, the ratios have been scaled, since most of the ratios have different ranges. An additional column has been created which takes the value 0.25 if the stock choice is preferable and 0 if it is not preferable.
+                        <p>The scatter plot uses the same theme as the other visualizations and has been created using plotly. When creating these plots, x and y limits have been set to remove outlier ratios. Hovering shows the axes ratios along with the ticker name. Preferable and not Preferable choices have been plotted in a different color, with the darker color being given to the preferable choice for more impact. <br>
+                        <br>
+                        <br>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Reflection</h2>
+                        <p>
+                        <ul>
+                        <li>Q. Describe how your project has developed from your initial proposal, through your first submission, to your final product. How have your visualization goals changed? <br>The goals and aspirations for this project developed in a number of ways. As the design of the project progressed, it became evident that some of the initial visualizations were impossible to achieve without using a backend server which was one of the constraints of the project. Other visualizations were identified to be redundant and or unnecessary. As such, the team decided to focus more on approaching the problem with a critical thinking approach. This significantly narrowed the aspirations for the project and assisted in its cohesiveness and usability. For example, a goal of the project was to enable users to compare any financial ratio of different companies together using a visualization. After completing the visualization, the team noticed that the instrument through which the visualization was completed cannot be used for the project.<br>Our critical thinking approach was to narrow the number of ratios and to focus on the most important ratios used when comparing different companies. This enabled us to use other methods that were permitted for the purposes of this project.<br>The final project has been altered from the initial proposal significantly. During the initial proposal, we were not critical about which visualizations would help the users and hence we had proposed a bunch of visualizations that did not serve the purpose of helping the narrative. This changed after the midpoint evaluation when we received some critical feedback from Professor Marck. After this feedback, we made a lot of changes to our visualization to better help support the narrative of helping a retail investor.<br></li>
+                        <li>Q. How have your technical goals changed?<br>Our technical goals changed from our initial proposal in the sense that we discovered better graphs to create. After our midpoint evaluation, we reflected back on numerous graphs that needed change to align better with the narrative of helping a retail investor. First of which, we scaled all the time series plots to start with $100, to actually see the growth of an industry or a ticker based on percentage. Secondly, we removed the chord plot and network plot as they didn’t help the retail investor. We created an innovative view that gives a rating on the scale of 0-5 for each sector for five different ratios, where 5 is good and 0 is bad. So to conclude, we didn't change the goal of our project, rather changed our approach and used visualizations to better obtain that goal. <br> </li>
+                        <li>Q. Was there anything you wanted to implement that you ultimately couldn't figure out how to do? If so, then what workarounds did you employ, or did you abandon your original idea? <br> Initially, we had built an interactive dashboard using dash. The dashboard would show a scatterplot of ratios and would allow the user to select which fundamentals to show on the x and y axes. Each ticker would be represented on the plot, and was color-encoded to represent the different GICS sectors, and had different icons based on the GICS sub-sector. In addition, the tickers were encoded with size which represented the Profit Margins for each company. Unfortunately, we discovered after creating the dashboard that we had no way of saving the resulting plots into a format that could be self-contained on the repository, as it relied on a local server running a script. We unfortunately had to discard that idea, and we ended up not using it. <br> </li>
+                        <li>Q. If you were to make the project again from scratch (or any other interactive visualization), what would you do differently? <br> We would check to see if headquarter location actually has had a statistical significance on the growth of a company. If we were to make the project again, we would spend some more time to find more recent data. Using this data we would try to predict stocks to invest in, just like a retail investor would. </li>
+
+                        </ul>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+      
+    </section>
+    <section id="whatwedo3" class="tm-section-pad-top">
+      <div class="container">
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <h1 class="tm-text-primary mb-xl-4 tm-section-title">Results</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Geographic overview of the headquarters of NYSE securities by sector</h2>
+                        <p class="mb-4 tm-intro-text">
+                          As an introductory graph, the visualization below aims to give users a sense of what is to come. The geolocation map has multiple functionalities embedded. First, using the labels on the top right side of the graph, the amount of data shown on the map can be filtered. This can aid investors to focus on one or more sectors of interest without having to view information from sectors they are not interested in. Additionally, the size of each scatter point is an additional dimension of the graph that allows users to identify the relative price of stocks when conducting analysis. A third functionality of the graph is the use of the tooltip. By hovering over different points of the scatter plot, users are able to view important information such as the name of the company, the ticker symbol, and the price of the company's stock.
+                        <figure>
+                            <figcaption><b>Plot 1 (This plot needs internet to be viewed)</b></figcaption>
+                            <iframe src="Headquarters_plotly.html" width="100%" height="650"></iframe>
+                          </figure>
+                        <p>From a purely geographic perspective and by filtering the data based on the GICS (Global Industry Classification Standard) Sector, we find that the majority of companies in all industries, with the exception of energy companies, are based out of the eastern side of the United States. By further focusing on the energy sector, it is clear that the majority of energy companies are headquartered out of the south. Another interesting finding is seen within the Information Technology sector. By focusing on this Sector, it is recognized that although there are many companies headquartered in the east, a massive cluster of substantially sized companies (scatter points), are based out of a region that spans between San Jose and San Francisco. By using the hover tip it can be seen that these companies are the silicon valley companies such as Facebook, Netflix, Apple, Google, and others. Furthermore, by using the hover tip, we are easily able to get the stock prices for the companies.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Technical" class="tm-section-pad-top">
+        <div class="container">
+
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <h2 class="tm-text-primary mb-4 tm-section-title">Technical Analysis Results</h2>
+                    <div class="tm-intro-text-container">
+                        <p>The terms technical and fundamental analyses have been heard innumerable times in the financial world, especially by retail investors. Throughout this project, these concepts will be explained in a simple manner, to avoid overwhelming a user.
+                        <p>Technical analysis refers to using stock prices to assess whether a stock must be purchased or not. The assumption is that the price of a stock is said to be representative of all the factors important for assessing whether to purchase. Technical analysis would mean dealing with daily stock prices, opening and closing prices, trading volumes, and so on. To help a retail investor with basic technical analysis a series of three plots will be used.
+
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Sectoral returns over time</h2>
+                        <p class="mb-4 tm-intro-text">
+                          The sectoral analysis will perform the analysis (technical/fundamental) based on the GICS Sectors. These will help a user understand how various sectors compare to each other and then decide which sector a user would want to invest in.
+                        <p>The sectoral analysis will perform the analysis (technical/fundamental) based on the individual publicly listed stock or ticker. These will help a user compare a number of stocks based on these analyses and make an informed decision. This section will focus on sectoral technical analysis.
+
+                        <figure>
+                            <figcaption><b>Plot 2 (Linked view)</b></figcaption>
+                            <iframe src="sectorViz.html" width="100%" height="650"></iframe>
+                        </figure>
+                        <p>This plot shows a user how an investment would grow if $100 had been invested, in an individual sector, for a period of seven years. It can be seen that consumer discretionary and health care were the best performing sectors, while energy and telecommunication services were the worst-performing sectors. Since technical analysis is mainly associated with the market and markets always have absorbed the effects of events happening around the world. For instance, in the case of energy, we can clearly see that the end of 2015 and the start of 2016 were particularly bad as prices had plunged as supplies piled up in storage due to resilient shale production and rising output from OPEC. If the past performance is a good indicator of the future performance, sectors like consumer discretionary, health care, industrials and technology can account for a good investment.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+      <div class="container">
+
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <h2 class="tm-hero-text-container mb-4 tm-section-title">Individual returns over time</h2>
+                        <p class="mb-4 tm-intro-text">
+                          This section will focus on helping a user with an individual stock rather than a sector to invest in.
+                        <figure>
+                          <figcaption><b>Plot 3 (Linked view)</b></figcaption>
+                          <iframe src="OlivierTickerViz_LinePlot.html" width="100%" height="650"></iframe>
+                        </figure>
+                        <p>Plot 3 extends onto the concept introduced in plot 2. It shows a user how an investment would grow if $100 had been invested, in an individual stock instead of an entire sector. It shows how the $100 invested at the start of 2010 grows, in the best performing company over the next seven years. Drawing on insights from this plot, REGN (Regeneron Pharmaceuticals Inc) has a massive growth, and the $100 investment reached more than $2400 during 2015 at its peak. The best performing stock of the worst performing sector also registers a growth of about 235% over seven years, which is lesser than other best-performing stocks but is a great return on investment nonetheless. A user can use this plot to make similar inferences to choose the right stock.
+                        </p>
+                        <p>Plots 2 and 3 have shown that investing in a sector definitely provides slower growth, but the growth is most likely assured over a long period of time, and investing in particular stocks can definitely provide larger gains but it is hard to choose the right stock.
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+      <div class="container">
+
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <p class="mb-4 tm-intro-text">
+
+                          <figure>
+                          <figcaption><b>Plot 4</b></figcaption>
+                          <iframe src="OlivierTickerVizBar_BarChart.html" width="100%" height="650"></iframe>
+                          </figure>
+                        <p>Plot 4 is an extension of plot 3 and shows the percentage growth of the top five companies of each of the eleven sectors from the start of 2010 to the end of 2016. One can see that not only is the best company of the top-performing sectors outperforming the underperforming sectors, all the top five companies outperform as well. The 4th and 5th best-performing companies in the telecommunications sector register a massive percentage loss. Energy and telecommunications show two different stories here, both these sectors performed very similarly with almost the same returns as shown in plot 2, but the top 5 ticker values show a completely different story with the 5th best-performing energy stock giving a higher return than the best performing telecommunications stock. This shows how investing money in one particular company has a high risk and high reward, whereas diversifying the investment to invest in multiple companies in a sector has a low risk and low reward.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+      
+    </section>
+
+    <section id="Fundamental" class="tm-section-pad-top">
+      
+      <div class="container">
+
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <h2 class="tm-text-primary mb-4 tm-section-title">Fundamental Analysis Results</h2>
+                        <p>
+                        <p class="mb-4 tm-intro-text">
+                          Fundamental analysis is one of the most extensively used methods for stock analysis. This means looking at a number of ratios using the fundamentals published in the company's year-end accounts rather than the prices dictated by the market for technical analysis. Some commonly known fundamentals would be the total assets, total liabilities, total revenue, total cash reserve, and so on.
+                        <br>
+                          There are five broad sets of ratios, assessing companies on different parameters. These five sets are:
+                          <br>
+                          1. Liquidity Ratios - These ratios assess whether a company has enough liquidity or rather they are able to pay off its current liabilities. It assesses a current situation rather than a longer time frame.
+                          <br>
+                          2. Leverage/Gearing Ratios - These ratios assess a company's 'gearing', which means how much debt a company has in comparison to its equity.
+                          <br>
+                          3. Efficiency Ratios - These ratios assess how efficiently a company is using its resources.
+                          <br>
+                          4. Profitability Ratios - These ratios suggest how profitable the company bas been as a function of various values, such as total assets held or total revenue generated.
+                          <br>
+                          5. Market Ratios - Finally these ratios assess the market position of a user.
+                          <br>
+                          <br>
+                          <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Sectoral Fundamental Analysis</h2>
+                        <p>
+                        Similar to the technical analysis section, the fundamental analysis section will have sectoral and individual analyses. This section will focus on sectoral analysis.
+                        <p>A user can use the plot above to assess which sector would be a good choice to invest in as a whole or invest in stocks belonging to that sector. It will also be insightful to look particularly into the Liquidity Ratios, to assess the short-term position of the GICS Sectors.
+                        <p><i>Since fundamental analysis can be more overwhelming than technical analysis, after each plot an ‘Example of Usage’ paragraph has been added. This provides an example of how a potential retail investor can use the given plot, to make investment decisions.</i></p>
+                        <p class="mb-4 tm-intro-text">
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Current Ratio</h2>
+                          The current ratio is the ratio of the company's current assets to current liabilities. The important word to look out for here is 'current' suggesting short-term. This ratio helps in understanding a company's short-term solvency. A higher ratio is more desired.
+                          <figure>
+                          <figcaption><b>Plot 5</b></figcaption>
+                          <iframe src="highchart_cur_ratio.html" width="100%" height="425"></iframe>
+                          </figure>
+                        <p>We can see from the plot below that the Information Technology sector has a higher average current ratio. Sectors like telecommunication services and energy follow suit with an increase over the years. The financial sector started out to have the highest current ratio in the year 2012 but then saw a huge dip in the consequent years. Utilities have consistently been the worst-performing sector in terms of the current ratio.
+                        </p>
+                        <p><i>Example of Usage: From the plot above it can be seen that the Information Technology sector has consistently had a good current ratio. Interestingly, the Energy sector has had an increasing current ratio, indicating that this sector has good growth in its solvency and hence this could be a good potential sector for a retail investor.</i><p>
+
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Cash Ratio</h2>
+                        <p class="mb-4 tm-intro-text">
+                          The cash ratio is the ratio of the company's current cash reserves to current liabilities. It is similar to the current ratio except that here just the current cash reserves are being looked to extinguish the current liability. It is a more prudent ratio than the current ratio.
+                          <br>
+                          Since the nature of businesses differs for all the companies, so will their ratios. Cash ratios however tell a very similar story to the current ratios. Information technology leading the way, followed by energy and health care. Utilities being the worst-performing sector over the years in terms of cash ratio as well.
+                          <figure>
+                          <figcaption><b>Plot 6</b></figcaption>
+                          <iframe src="highchart_cash_ratio.html" width="100%" height="425"></iframe>
+                          </figure>
+                        <p><i>Example of Usage: From the plot above it can be seen that similar to Plot 5, the Information Technology sector has consistently had a good cash ratio. The Financial sector has had a cash ratio that has been dropping which could mean that there is a decline in the growth in their solvency and hence a retail investor should choose another sector to invest in.</i></p>
+                        </p>
+                          <br>
+                        <p>Ideally when purchasing stocks, one would require excellent values for all the sets of ratios. However, it does not work that way in reality. Some companies may be extremely liquid, but not profitable or some may have excellent leverage but may not be very efficient. The plot below helps a user choose a sector to invest in using 5 important fundamental ratios. These 5 ratios are all representative of the 5 categories spoken above and are:</p>
+                        <ul>
+                            <li>Liquidity: Current Ratio - The current ratio is the ratio of the company's current assets to current liabilities. The important word to look out for here is 'current' suggesting short-term. This ratio helps in understanding a company's short-term solvency. A higher ratio is more desired.
+                            </li>
+                            <li>Gearing: Leverage - This is the ratio of a company’s total debt to its total equity. A lower ratio is preferred as it shows that a company has lesser debt obligations and this would mean more profits would get distributed to stockholders.
+                            </li>
+                            <li>Efficiency: Asset Utilization - This represents the revenue generated as a proportion of the assets. It shows how well a company is able to utilize its assets in order to generate revenue. A higher ratio is preferred.
+                            </li>
+                            <li>Profitability: After-Tax RoE (After-Tax Return on Equity): This is a particularly important ratio for stockholders as it shows how much income has been generated based on the total equity. A higher ratio is more desired since everyone would want more income from their equity.
+                            </li>
+                            <li>Market: Price Earnings Ratio - It is a ratio of the company’s current price to its earnings per share and is an assessment of how the current stock is valued for a company. A lower value is desired.
+                            </li>
+                        </ul>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Innovative View: Sectoral analysis using 5 important fundamental ratios</h2>
+                        <p class="mb-4 tm-intro-text">
+                        <p>
+                        This plot helps a user choose which sector to invest in based on 5 of the above ratios. This plot is unique in the sense that it allows a user to compare all the 5 ratios at the same time and then make a decision. Since a few ratios are better low and a few are better high, the data is scaled in an “innovative way” such that the ratios are represented on a scale of 0-5 where 0 represents a bad standing and 5 represents a bad standing. So sectors that cover a larger area would be good choices for investment.
+
+                        <figure>
+                          <figcaption><b>Plot 7 (Innovative)</b></figcaption>
+                          <iframe src="radar.html" width="100%" height="650"></iframe>
+                          </figure>
+                        </p>
+                        <p>Using the information above, a user can see the plot shapes for each of the sectors and assess which sector would be a good choice, compared to the ideal situation. However, a user will still have to take a call as no sector will have the ideal ratio levels and there will always be a trade-off.
+                            <br><i>Example of Usage: From the plot above, the Energy sector has an excellent current ratio and return on equity, good asset utilization, and a price-earnings ratio along with high leverage. Most of the ratios have good levels, apart from leverage. This should be fine considering that leverage represents potential security and profitability for a company. However, the current ratio indicates good security and the return on equity indicates good profitability, which suggests that Energy could be a good potential sector for a retail investor.</i>
+                        <br>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Individual Fundamental Analyses</h2>
+                        <p>
+                        <p class="mb-4 tm-intro-text">
+                          <figure>
+                          <figcaption><b>Plot 8</b></figcaption>
+                          <iframe src="top10_circularbarplot.png" width="69%" height="650"></iframe>
+                          </figure>
+                        <p><i>For the company names of the tickers, please click <a href="https://www.nyse.com/listings_directory/stock">here</a>(This requires internet connection). </i><p>
+                        <p><i>Example of Usage: From the plot above it can be seen that the stock ABC (AmerisourceBergen Corp.) has the highest asset utilization ratio and also is a part of the top 10 stocks based on return on equity as well. This suggests how this company has generated a good revenue stream based on the number of assets they have and also generated profitable income. This could be a good potential stock for a retail investor.</i><p>
+                        </p>
+                        <h2 class="tm-hero-text-container mb-4 tm-section-title">Relationship between Price Earnings Ratio and Leverage</h2>
+                        <p class="mb-4 tm-intro-text">
+                        <p>A user may also want to assess a stock in terms of two or more ratios. To aid with this, a scatter plot of Price Earnings Ratio and Leverage has been plotted. A user can hover over this plot across various stocks, which are represented as various points. The user will be able to see the ratio values for both the tickers and the name of the ticker as well. Preferable choices will be stocks with a low price-earnings ratio and low leverage. To aid with this, the preferable choices have been colored in a darker color, giving these points more emphasis in the plot.
+
+                          <figure>
+                          <figcaption><b>Plot 9</b></figcaption>
+                          <iframe src="scatterplot_1.html" width="100%" height="650"></iframe>
+                          </figure>
+                        <p><i>Example of usage - From the plot above, it can be seen that the stock GILD (Gilead Science Inc.) has a low price-earnings ratio and low leverage, indicating that this stock is a good buy, is currently cheap to buy and most of this company’s profits are passed as equity to its stockholders. This could be a good potential stock for a retail investor.</i><p>
+                        </p>
+
+                        <h2 class="tm-hero-text-container mb-4 tm-section-subtitle">Relationship between Asset Utilization and Return on Equity</h2>
+                        <p>To help a user particularly with profitability and efficiency of a company, a scatter plot of Asset Utilization Ratio and Return on Equity have been plotted. Similar to the previous plot, a user can hover over this plot across various stocks, which are represented as various points. The user will be able to see the ratio values for both the tickers and the name of the ticker as well. Preferable choices will be stocks with high asset utilization and high return on equity. To aid with this, the preferable choices have been colored in a darker color, giving these points more emphasis in the plot.
+
+                        <p class="mb-4 tm-intro-text">
+                          <figure>
+                          <figcaption><b>Plot 10</b></figcaption>
+                          <iframe src="scatterplot_2.html" width="100%" height="650"></iframe>
+                          </figure>
+                        </p>
+                        <p><i>Example of usage - From the plot above, it can be seen that the stock GILD (Gilead Science Inc.) also has a high asset utilization ratio and high return on equity, indicating that this company utilizes its assets efficiently and also generates good profits for its stockholders. This could be a good potential stock for a retail investor considering both the plots or all the ratios.</i><p>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+      
+    </section>
+
+    <section id="Conclusion" class="tm-section-pad-top">
+        <div class="container">
+            <h2 class="tm-text-primary mb-4 tm-section-title">Conclusion</h2>
+            <div class="row tm-content-box"><!-- first row -->
+                <div class="col-lg-12 col-xl-12">
+                    <div class="tm-intro-text-container">
+                        <p class="mb-4 tm-intro-text">
+                          The two types of stock analysis have been spoken about throughout this project. They are very different in the approaches that they have for stock selection. Technical analysis is focused on the market as a whole, and fundamental analysis is focused on the fundamentals of each company that have been published in the company’s accounts. Since these have different approaches, they could lead to different choices of which stocks or sectors to invest in.
+                            <br>
+                            <h2 class="tm-intro-text-container mb-4 tm-section-subtitle">Technical Analysis Conclusions</h2>
+                            <p>Based on this analysis, Health Care would be a good choice for a sector to invest in. Consumer Discretionary  also seems to be a good choice in terms of growth. For individual stocks, Regeneron Pharmaceuticals Inc would be a great choice in terms of return on investment. Ulta beauty would be another good choice for an individual stock that has achieved great returns over this period.
+                            </p>
+                            <p>
+                                <h2 class="tm-intro-text-container mb-4 tm-section-subtitle">Fundamental Analysis Conclusions</h2>
+                                Based on this analysis, Energy would be a good choice for a sector to invest in. Information Technology also seems to be a good choice in terms of consistency. For individual stocks, Gilead Sciences seems like a great choice based on all the 5 important ratios. Another excellent stock in terms of great ratios is IBM. These are few options and a user must always look for which sector/stock to invest in, based on their own individual goals.
+                            </p>
+                            <p>
+                                <h2 class="tm-intro-text-container mb-4 tm-section-subtitle">Further work</h2>
+                           Machine learning models can be used to train over previous stock performances and returns. However, the stock market is run ultimately by human emotions and no model can accurately predict the growth of a company, but it could help in understanding the multi dimensional data and help in making decisions and more conclusions.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    
+    <script src="frontend/js/jquery-1.9.1.min.js"></script>     
+    <script src="frontend/slick/slick.min.js"></script>
+    <script src="frontend/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="frontend/js/easing.min.js"></script>
+    <script src="frontend/js/jquery.singlePageNav.min.js"></script>     
+    <script src="frontend/js/bootstrap.min.js"></script> 
+    <script>
+
+      function getOffSet(){
+        var _offset = 450;
+        var windowHeight = window.innerHeight;
+
+        if(windowHeight > 500) {
+          _offset = 400;
+        } 
+        if(windowHeight > 680) {
+          _offset = 300
+        }
+        if(windowHeight > 830) {
+          _offset = 210;
+        }
+
+        return _offset;
+      }
+
+      function setParallaxPosition($doc, multiplier, $object){
+        var offset = getOffSet();
+        var from_top = $doc.scrollTop(),
+          bg_css = 'center ' +(multiplier * from_top - offset) + 'px';
+        $object.css({"background-position" : bg_css });
+      }
+
+      // Parallax function
+      // Adapted based on https://codepen.io/roborich/pen/wpAsm        
+      var background_image_parallax = function($object, multiplier, forceSet){
+        multiplier = typeof multiplier !== 'undefined' ? multiplier : 0.5;
+        multiplier = 1 - multiplier;
+        var $doc = $(document);
+        // $object.css({"background-attatchment" : "fixed"});
+
+        if(forceSet) {
+          setParallaxPosition($doc, multiplier, $object);
+        } else {
+          $(window).scroll(function(){          
+            setParallaxPosition($doc, multiplier, $object);
+          });
+        }
+      };
+
+      var background_image_parallax_2 = function($object, multiplier){
+        multiplier = typeof multiplier !== 'undefined' ? multiplier : 0.5;
+        multiplier = 1 - multiplier;
+        var $doc = $(document);
+        $object.css({"background-attachment" : "fixed"});
+        
+        $(window).scroll(function(){
+          if($(window).width() > 768) {
+            var firstTop = $object.offset().top,
+                pos = $(window).scrollTop(),
+                yPos = Math.round((multiplier * (firstTop - pos)) - 186);              
+
+            var bg_css = 'center ' + yPos + 'px';
+
+            $object.css({"background-position" : bg_css });
+          } else {
+            $object.css({"background-position" : "center" });
+          }
+        });
+      };
+      
+      $(function(){
+        // Hero Section - Background Parallax
+        background_image_parallax($(".tm-parallax"), 0.30, false);
+        background_image_parallax_2($("#contact"), 0.80);   
+        background_image_parallax_2($("#testimonials"), 0.80);   
+        
+        // Handle window resize
+        window.addEventListener('resize', function(){
+          background_image_parallax($(".tm-parallax"), 0.30, true);
+        }, true);
+
+        // Detect window scroll and update navbar
+        $(window).scroll(function(e){          
+          if($(document).scrollTop() > 120) {
+            $('.tm-navbar').addClass("scroll");
+          } else {
+            $('.tm-navbar').removeClass("scroll");
+          }
+        });
+        
+        // Close mobile menu after click 
+        $('#tmNav a').on('click', function(){
+          $('.navbar-collapse').removeClass('show'); 
+        })
+
+        // Scroll to corresponding section with animation
+        $('#tmNav').singlePageNav({
+          'easing': 'easeInOutExpo',
+          'speed': 600
+        });        
+        
+        // Add smooth scrolling to all links
+        // https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
+        $("a").on('click', function(event) {
+          if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+
+            $('html, body').animate({
+              scrollTop: $(hash).offset().top
+            }, 600, 'easeInOutExpo', function(){
+              window.location.hash = hash;
+            });
+          } // End if
+        });
+
+        // Pop up
+        $('.tm-gallery').magnificPopup({
+          delegate: 'a',
+          type: 'image',
+          gallery: { enabled: true }
+        });
+
+        $('.tm-testimonials-carousel').slick({
+          dots: true,
+          prevArrow: false,
+          nextArrow: false,
+          infinite: false,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          responsive: [
+            {
+              breakpoint: 992,
+              settings: {
+                slidesToShow: 2
+              }
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                slidesToShow: 2
+              }
+            }, 
+            {
+              breakpoint: 480,
+              settings: {
+                  slidesToShow: 1
+              }                 
+            }
+          ]
+        });
+
+        // Gallery
+        $('.tm-gallery').slick({
+          dots: true,
+          infinite: false,
+          slidesToShow: 5,
+          slidesToScroll: 2,
+          responsive: [
+          {
+            breakpoint: 1199,
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 991,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+        });
+      });
+    </script>
+  </body>
+</html>
